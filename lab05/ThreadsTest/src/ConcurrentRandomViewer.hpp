@@ -17,6 +17,7 @@ namespace ThreadsTest {
         void request() noexcept;
         void stop() noexcept;
 
+        static void main_loop(int dim1, int dim2);
 
         struct crv_error;
 
