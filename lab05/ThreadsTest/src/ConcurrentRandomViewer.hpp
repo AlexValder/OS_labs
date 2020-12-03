@@ -4,6 +4,8 @@
 #include <atomic>
 #include <thread>
 
+#define UNSAFE_NO_PROTECTION 0
+
 namespace ThreadsTest {
     class ConcurrentRandomViewer final {
     public:
@@ -24,10 +26,17 @@ namespace ThreadsTest {
     private:
         int** _array;
         size_t _dim1, _dim2;
+#if !UNSAFE_NO_PROTECTION
         std::atomic_bool _started = false;
         std::atomic_uint _num_local_min = 0;
+#else
+        bool _started = false;
+        unsigned _num_local_min = 0;
+#endif
 
+#if !UNSAFE_NO_PROTECTION
         std::mutex _lock;
+#endif
         std::thread _modifer;
 
         ~ConcurrentRandomViewer();

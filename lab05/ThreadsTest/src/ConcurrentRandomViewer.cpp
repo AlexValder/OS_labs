@@ -29,8 +29,9 @@ ConcurrentRandomViewer::ConcurrentRandomViewer(size_t m, size_t n) : _dim1(m), _
 }
 
 ConcurrentRandomViewer::~ConcurrentRandomViewer() {
-
+#if !UNSAFE_NO_PROTECTION
     this->_lock.lock();
+#endif
 
     this->_started = false;
     this->_modifer.join();
@@ -40,7 +41,9 @@ ConcurrentRandomViewer::~ConcurrentRandomViewer() {
     }
     delete[] this->_array;
 
+#if !UNSAFE_NO_PROTECTION
     this->_lock.unlock();
+#endif
 }
 
 void ConcurrentRandomViewer::start() noexcept {
@@ -53,7 +56,9 @@ void ConcurrentRandomViewer::start() noexcept {
     this->_started = true;
     this->_modifer = std::thread([&]() {
         while(this->_started) {
+#if !UNSAFE_NO_PROTECTION
             this->_lock.lock();
+#endif
 
             for (size_t i = 0; i < this->_dim1; ++i) {
                 for (size_t j = 0; j < this->_dim2; ++j) {
@@ -172,8 +177,9 @@ void ConcurrentRandomViewer::start() noexcept {
                     ) {
                 ++this->_num_local_min;
             }
-
+#if !UNSAFE_NO_PROTECTION
             this->_lock.unlock();
+#endif
             std::this_thread::sleep_for(std::chrono::seconds(rand() % 10));
         }
     });
@@ -185,7 +191,9 @@ void ConcurrentRandomViewer::request() noexcept {
         return;
     }
 
+#if !UNSAFE_NO_PROTECTION
     this->_lock.lock();
+#endif
     std::cout << "\nCurrent state of the 2D array:\n";
     for (size_t i = 0; i < this->_dim1; ++i) {
         for (int q = 0; q < (int)this->_dim1 * 6; ++q) putchar('-');
@@ -200,11 +208,17 @@ void ConcurrentRandomViewer::request() noexcept {
     printf("+\n");
 
     std::cout << "Number of local minimums: " << this->_num_local_min << std::endl;
+#if !UNSAFE_NO_PROTECTION
     this->_lock.unlock();
+#endif
 }
 
 void ConcurrentRandomViewer::stop() noexcept {
+#if !UNSAFE_NO_PROTECTION
     this->_lock.lock();
+#endif
     this->_started = false;
+#if !UNSAFE_NO_PROTECTION
     this->_lock.unlock();
+#endif
 }
