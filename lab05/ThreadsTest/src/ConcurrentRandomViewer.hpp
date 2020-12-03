@@ -25,6 +25,7 @@ namespace ThreadsTest {
         int** _array;
         size_t _dim1, _dim2;
         std::atomic_bool _started = false;
+        std::atomic_uint _num_local_min = 0;
 
         std::mutex _lock;
         std::thread _modifer;

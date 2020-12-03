@@ -20,14 +20,13 @@ void ThreadsTest::ConcurrentRandomViewer::main_loop(int dim1, int dim2) {
     std::cout << "Welcome to Lab05 program!\n\n"
               << "\t1. Start.\n"
               << "\t2. Request.\n"
-              << "\t0. Exit.\n"
-              << "Enter command: ";
-
+              << "\t0. Exit.\n";
     auto* crv = new ConcurrentRandomViewer(dim1, dim2);
 
     std::string input_command;
 
     while (true) {
+        std::cout << "\nEnter command: ";
         std::getline(std::cin, input_command);
 
         switch (str2enum(input_command)) {
