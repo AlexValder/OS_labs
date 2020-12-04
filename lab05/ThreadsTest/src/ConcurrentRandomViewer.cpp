@@ -196,7 +196,7 @@ void ConcurrentRandomViewer::request() noexcept {
 #endif
     std::cout << "\nCurrent state of the 2D array:\n";
     for (size_t i = 0; i < this->_dim1; ++i) {
-        for (int q = 0; q < (int)this->_dim1 * 6; ++q) putchar('-');
+        for (size_t q = 0; q < (int)this->_dim2 * 6; ++q) putchar('-');
         printf("+\n");
         for (size_t j = 0; j < this->_dim2; ++j) {
             printf("| %3d ", this->_array[i][j]);
@@ -204,7 +204,7 @@ void ConcurrentRandomViewer::request() noexcept {
         }
         std::cout << "|\b\n";
     }
-    for (int q = 0; q < (int)this->_dim1 * 6; ++q) putchar('-');
+    for (int q = 0; q < (int)this->_dim2 * 6; ++q) putchar('-');
     printf("+\n");
 
     std::cout << "Number of local minimums: " << this->_num_local_min << std::endl;
