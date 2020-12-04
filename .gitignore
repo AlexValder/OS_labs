@@ -2,3 +2,5 @@
 *.pdf
 *.djvu
 */build-*
+*.linux
+*.tar.gz
