@@ -62,7 +62,7 @@ void ConcurrentRandomViewer::start() noexcept {
 
             for (size_t i = 0; i < this->_dim1; ++i) {
                 for (size_t j = 0; j < this->_dim2; ++j) {
-                    this->_array[i][j] = rand() % 200 - 100; // from -100 to 100
+                    this->_array[i][j] = rand() % 199 - 99; // from -100 to 100
                 }
             }
 
