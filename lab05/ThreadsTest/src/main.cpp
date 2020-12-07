@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ConcurrentRandomViewer.hpp"
+#include "ThreadSafeArrayViewer.hpp"
 using namespace std;
 
 int main(int argc, char** argv)
@@ -17,13 +17,13 @@ int main(int argc, char** argv)
     case 2:
         std::cout << "One argument supplied, second one is assumed to be the same. Starting the app...";
         dim = atoi(argv[1]);
-        ThreadsTest::ConcurrentRandomViewer::main_loop(dim, dim);
+        ConcurrentApplication::ThreadSafeArrayViewer::loop(dim, dim);
         break;
     case 3:
         std::cout << "Two arguments supplied. Starting the app...";
         dim1 = atoi(argv[1]);
         dim2 = atoi(argv[2]);
-        ThreadsTest::ConcurrentRandomViewer::main_loop(dim1, dim2);
+        ConcurrentApplication::ThreadSafeArrayViewer::loop(dim1, dim2);
         break;
     default:
         break;
