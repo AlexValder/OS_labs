@@ -1,0 +1,6 @@
+[submodule "lab04"]
+	path = lab04/Dynamic-linking-experiments
+	url = git@github.com:ArthurMamedov/Dynamic-linking-experiments.git
+[submodule "lab06"]
+	path = lab06/NRM-Emulator
+	url = git@github.com:ArthurMamedov/NRM-Emulator.git
